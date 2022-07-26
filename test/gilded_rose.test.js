@@ -17,5 +17,14 @@ describe("Gilded Rose", function() {
       expect(gildedRose.items[0].sellIn).toBe(0);
       expect(gildedRose.items[0].quality).toBe(0);
     })
+
+    describe('updateQuality function', () => {
+      it('when one foo item is added, it decreases the sellIn value by 1, and quality value by 1', () => {
+        const gildedRose = new Shop([new Item('foo', 10, 10)])
+        gildedRose.updateQuality()
+        expect(gildedRose.items[0].sellIn).toBe(9);
+        expect(gildedRose.items[0].quality).toBe(9);
+      })
+    })
   })
 });
