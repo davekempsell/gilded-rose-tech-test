@@ -12,11 +12,13 @@ class Shop {
   }
   updateQuality() {
     this.items.forEach((item) => {
-      item.sellIn -= 1;
-      if(item.sellIn <= 0) {
-        item.quality > 1 ? item.quality -= 2 : item.quality = 0
-      } else {
-        item.quality > 0 ? item.quality -= 1 : item.quality = 0
+      if (item.name != "Sulfuras, Hand of Ragnaros") {
+        item.sellIn -= 1;
+        if(item.sellIn <= 0) {
+          item.quality > 1 ? item.quality -= 2 : item.quality = 0
+        } else {
+          item.quality > 0 ? item.quality -= 1 : item.quality = 0
+        }
       }
     })
 
