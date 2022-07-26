@@ -11,12 +11,15 @@ class Shop {
     this.items = items;
   }
   updateQuality() {
-    this.items[0].sellIn -= 1;
-    if(this.items[0].sellIn <= 0) {
-      this.items[0].quality > 1 ? this.items[0].quality -= 2 : this.items[0].quality = 0
-    } else {
-      this.items[0].quality > 0 ? this.items[0].quality -= 1 : this.items[0].quality = 0
-    }
+    this.items.forEach((item) => {
+      item.sellIn -= 1;
+      if(item.sellIn <= 0) {
+        item.quality > 1 ? item.quality -= 2 : item.quality = 0
+      } else {
+        item.quality > 0 ? item.quality -= 1 : item.quality = 0
+      }
+    })
+
 
     return this.items;
   }
