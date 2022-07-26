@@ -87,6 +87,18 @@ describe("Gilded Rose", function() {
         expect(gildedRose.items[0].sellIn).toBe(3);
         expect(gildedRose.items[0].quality).toBe(23);
       })
+      it('conjured items degrade in quality twice as fast as normal items', () => {
+        const gildedRose = new Shop([new Item("Conjured Mana Cake", 2, 10)])
+        // updateQuality function called whilst item is within sell by date
+        gildedRose.updateQuality()
+        expect(gildedRose.items[0].sellIn).toBe(1);
+        expect(gildedRose.items[0].quality).toBe(8);
+
+        // call updateQuality function again to take item beyond sell by date
+        gildedRose.updateQuality()
+        expect(gildedRose.items[0].sellIn).toBe(0);
+        expect(gildedRose.items[0].quality).toBe(4);
+      })
     })
   })
 });
