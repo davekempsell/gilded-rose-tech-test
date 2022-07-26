@@ -14,9 +14,15 @@ class Shop {
     this.items.forEach((item) => {
       if(item.name != "Sulfuras, Hand of Ragnaros") {
         item.sellIn -= 1;
-        if(item.name != "Aged Brie") {
+        if(item.name.includes("Backstage passes")) {
           if(item.sellIn <= 0) {
-            item.name.includes("Backstage passes") ? item.quality = 0 : item.quality -= 2;
+            item.quality = 0;
+          } else {
+            item.quality += 1;
+          }
+        } else if(item.name != "Aged Brie" ) {
+          if(item.sellIn <= 0) {
+            item.quality -= 2;
           } else {
             item.quality -= 1;
           }
