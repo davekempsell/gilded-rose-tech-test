@@ -12,7 +12,12 @@ class Shop {
   }
   updateQuality() {
     this.items[0].sellIn -= 1;
-    this.items[0].quality -= 1;
+    if(this.items[0].sellIn <= 0) {
+      this.items[0].quality -= 2;
+    } else {
+      this.items[0].quality -= 1;
+    }
+    
     return this.items;
   }
 }
