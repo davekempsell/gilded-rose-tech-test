@@ -16,7 +16,7 @@ class Shop {
         item.sellIn -= 1;
         if(item.name != "Aged Brie") {
           if(item.sellIn <= 0) {
-            item.quality -= 2;
+            item.name.includes("Backstage passes") ? item.quality = 0 : item.quality -= 2;
           } else {
             item.quality -= 1;
           }
