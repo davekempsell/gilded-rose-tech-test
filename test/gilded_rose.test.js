@@ -9,4 +9,13 @@ describe("Gilded Rose", function() {
       expect(foo.quality).toBe(0);
     })
   })
+
+  describe('Shop class', () => {
+    it('receives Items', () => {
+      const gildedRose = new Shop([new Item('foo', 0, 0)])
+      expect(gildedRose.items[0].name).toBe('foo');
+      expect(gildedRose.items[0].sellIn).toBe(0);
+      expect(gildedRose.items[0].quality).toBe(0);
+    })
+  })
 });
