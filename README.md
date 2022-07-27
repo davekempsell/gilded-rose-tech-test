@@ -25,7 +25,7 @@ Feel free to make any changes to the `UpdateQuality` method and add any new code
 
 Legacy code was downloaded from (https://github.com/emilybache/GildedRose-Refactoring-Kata) (translated by Emily Bache).
 
-"Refactor the code in such a way that adding the new "conjured" functionality is easy."
+"Refactor the code in such a way that adding the new "conjured" functionality is easy.
 
 ## Getting started
 
