@@ -25,12 +25,10 @@ class Shop {
             item.quality += 1;
           }
         } else if(item.name != "Aged Brie" ) {
-          if(item.sellIn <= 0) {
-            // function checks if item name includes Conjured, and degrades quality by twice as much if it does
-            item.name.includes("Conjured") ? item.quality -= 4 :item.quality -= 2;
-          } else {
-            item.name.includes("Conjured") ? item.quality -= 2 :item.quality -= 1;
-          }
+          // Conjured items requirement added
+          item.name.includes("Conjured") ? 
+            item.sellIn <= 0 ? item.quality -= 4 :item.quality -= 2
+            : item.sellIn <= 0 ? item.quality -= 2 :item.quality -= 1;
         } else {
           item.quality += 1;
         }
