@@ -54,3 +54,21 @@ To generate test coverage report
 ```sh
 npm run test:coverage
 ```
+
+## Design
+
+At first I read through the existing code to understand what was happening currently, and to answer questions from the description. This led me to being able to ascertain that items decreased by 1 in quality as 'standard', and 'Aged Brie' increased by 1, as these values weren't stated in the brief.
+
+I decided to unit test the Item class as a starting point, before moving on to the Shop class, for completeness of testing. Once I moved on to testing the Shop class, I decided to remove the existing code, and rebuild the function from the bottom up using TDD.
+
+I broke down the requirements of the class as follows:
+
+`What updateQuality does:`
+**Item      || sellIn    || Quality**
+Normal    || -1        || -1 (-2 when sellIn <= 0)
+Sulfuras  || no change || no change
+Aged Brie || -1        || +1
+Backstage || -1        || +1 (+2 when sellIn <= 10, +3 when sellIn <= 5, =0 when sellIn <= 0)
+Conjured  || -1        || -2 (-4 when sellIn <= 0)
+
+This table allowed me to plan my process of test driving the function. Creating tests to incrementally add functionality to satisfy the requirements of the program, finishing with adding the Conjured items in much easier way than inserting it into the previous code.
