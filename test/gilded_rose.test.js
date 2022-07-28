@@ -17,6 +17,10 @@ describe("Gilded Rose", function() {
       expect(gildedRose.items[0].sellIn).toBe(0);
       expect(gildedRose.items[0].quality).toBe(0);
     })
+    it('generates an empty array on construction', () => {
+      const gildedRose = new Shop;
+      expect(gildedRose.items).toEqual ([])
+    })
 
     describe('updateQuality function', () => {
       it('for one normal item, it decreases the sellIn value by 1, and quality value by 1', () => {
@@ -87,6 +91,12 @@ describe("Gilded Rose", function() {
         expect(gildedRose.items[0].sellIn).toBe(3);
         expect(gildedRose.items[0].quality).toBe(23);
       })
+      it('backstage pass quality cannot exceed 50', () => {
+        const gildedRose = new Shop([new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 4, 50)])
+        gildedRose.updateQuality()
+        expect(gildedRose.items[0].sellIn).toBe(3);
+        expect(gildedRose.items[0].quality).toBe(50);
+      })
       it('conjured items degrade in quality twice as fast as normal items', () => {
         const gildedRose = new Shop([new ConjuredItem("Conjured Mana Cake", 2, 10)])
         // updateQuality function called whilst item is within sell by date
@@ -98,6 +108,13 @@ describe("Gilded Rose", function() {
         gildedRose.updateQuality()
         expect(gildedRose.items[0].sellIn).toBe(0);
         expect(gildedRose.items[0].quality).toBe(4);
+      })
+      it('conjured items quality cannot go below 0', () => {
+        const gildedRose = new Shop([new ConjuredItem("Conjured Mana Cake", 2, 0)])
+        // updateQuality function called when quality value is already 0
+        gildedRose.updateQuality()
+        expect(gildedRose.items[0].sellIn).toBe(1);
+        expect(gildedRose.items[0].quality).toBe(0);
       })
     })
   })

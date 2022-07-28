@@ -88,3 +88,14 @@ To generate test coverage report
 npm run test:coverage
 ```
 
+## Test Coverage
+----------------|---------|----------|---------|---------|-------------------
+File            | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+----------------|---------|----------|---------|---------|-------------------
+All files       |     100 |      100 |     100 |     100 |                   
+ gilded_rose.js |     100 |      100 |     100 |     100 |                   
+----------------|---------|----------|---------|---------|-------------------
+Test Suites: 1 passed, 1 total
+Tests:       17 passed, 17 total
+Snapshots:   0 total
+Time:        0.435 s, estimated 1 s
