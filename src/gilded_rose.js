@@ -14,11 +14,9 @@ class Shop {
   updateQuality() {
     this.items.forEach((item) => {
       if(item.name != "Sulfuras, Hand of Ragnaros") {
-        item.sellIn -= 1;
         item.name.includes("Backstage passes") ? this.#backstagePasses(item)
           : item.name.includes("Aged Brie") ? this.#agedBrie(item)
-            : item.name.includes("Conjured") ? this.#conjured(item) : this.#normalItem(item);
-        this.#qualityLimiter(item);  
+            : item.name.includes("Conjured") ? this.#conjured(item) : this.#normalItem(item); 
       }
     })
     return this.items;
@@ -31,21 +29,29 @@ class Shop {
   }
 
   #normalItem(item) {
+    item.sellIn -= 1;
     item.sellIn <= 0 ? item.quality -= 2 : item.quality -= 1;
+    this.#qualityLimiter(item);
   }
 
   #agedBrie(item) {
+    item.sellIn -= 1;
     item.quality += 1;
+    this.#qualityLimiter(item);
   }
 
   #backstagePasses(item) {
+    item.sellIn -= 1;
     item.sellIn <= 0 ? item.quality = 0
       : item.sellIn <= 5 ? item.quality += 3
-        : item.sellIn <= 10 ? item.quality += 2 : item.quality += 1
+        : item.sellIn <= 10 ? item.quality += 2 : item.quality += 1;
+    this.#qualityLimiter(item);
   }
 
   #conjured(item) {
+    item.sellIn -= 1;
     item.sellIn <= 0 ? item.quality -= 4 : item.quality -= 2;
+    this.#qualityLimiter(item);
   }
 }
 
