@@ -9,8 +9,17 @@ class Item {
 class NormalItem extends Item {
   updateItemQuality() {
     this.sellIn -= 1;
-    this.sellIn <= 0 ? this.quality -= 2 : this.quality -= 1;
-    this.quality < 0 ? this.quality = 0 : this.quality = this.quality;
+    if (this.sellIn <= 0) {
+      this.quality -= 2;
+    } else {
+      this.quality -= 1;
+    } 
+    this.qualityLimiter();
+  }
+  qualityLimiter() {
+    if (this.quality <= 0) {
+      this.quality = 0;
+    }
   }
 }
 
@@ -22,25 +31,50 @@ class Cheese extends Item {
   updateItemQuality() {
     this.sellIn -= 1;
     this.quality += 1;
-    this.quality > 50 ? this.quality = 50 : this.quality = this.quality;
+    this.qualityLimiter();
+  }
+  qualityLimiter() {
+    if (this.quality >= 50) {
+      this.quality = 50;
+    }
   }
 }
 
 class BackstagePass extends Item {
   updateItemQuality() {
     this.sellIn -= 1;
-    this.sellIn <= 0 ? this.quality = 0
-      : this.sellIn <= 5 ? this.quality += 3
-        : this.sellIn <= 10 ? this.quality += 2 : this.quality += 1;
-    this.quality > 50 ? this.quality = 50 : this.quality = this.quality;
+    if (this.sellIn <= 0) {
+      this.quality = 0
+    } else if (this.sellIn <= 5) {
+      this.quality += 3;
+    } else if (this.sellIn <= 10) {
+      this.quality += 2;
+    } else {
+      this.quality += 1;
+    }
+    this.qualityLimiter();
+  }
+  qualityLimiter() {
+    if (this.quality >= 50) {
+      this.quality = 50;
+    }
   }
 }
 
 class ConjuredItem extends Item {
   updateItemQuality() {
     this.sellIn -= 1;
-    this.sellIn <= 0 ? this.quality -= 4 : this.quality -= 2;
-    this.quality < 0 ? this.quality = 0 : this.quality = this.quality;
+    if (this.sellIn <= 0) {
+      this.quality -= 4;
+    } else {
+      this.quality -= 2;
+    } 
+    this.qualityLimiter();
+  }
+  qualityLimiter() {
+    if (this.quality <= 0) {
+      this.quality = 0;
+    }
   }
 }
 
