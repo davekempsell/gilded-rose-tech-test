@@ -27,7 +27,46 @@ Legacy code was downloaded from (https://github.com/emilybache/GildedRose-Refact
 
 "Refactor the code in such a way that adding the new "conjured" functionality is easy.
 
+## Design
+
+Based on the brief and existing code, I created the following table to represent the behaviour or each type of item
+
+`What updateQuality does:`
+**Item      || sellIn    || Quality**
+Normal    || -1        || -1 (-2 when sellIn <= 0)
+Sulfuras  || no change || no change
+Aged Brie || -1        || +1
+Backstage || -1        || +1 (+2 when sellIn <= 10, +3 when sellIn <= 5, =0 when sellIn <= 0)
+Conjured  || -1        || -2 (-4 when sellIn <= 0)
+
+This table allowed me to write a test suite that covered the required behaviour of each type of item, and rebuild
+
+This table allowed me to plan my process of test driving the function. Creating tests to incrementally add functionality to satisfy the requirements of the program, finishing with adding the Conjured items.
+
+The code was then refactored to make it clear, adhering to the single-responsibility principle, and utilising polymorphism to reduce duplication of code.
+
+This led to the following Domain Model
+
+Classes
+
+PARENT CLASS
+`Item`
+*This class remains unchanged, as per the instructions*
+Used to create an instance of an item to be passed to the shop.
+
+CHILD CLASSES
+`NormalItem`, `LegendaryItem`, `Cheese`, `BackstagePass`, `ConjuredItem`
+Classes for each category of item.
+`updateItemQuality()` updates the item according to the appropriate rules, changing the sellIn and quality values when appropriate
+`qualityLimiter()` ensures item quality value doesn't exceed 50 or drop below 0.
+
+`Shop`
+*receives items and stores them in the this.items array*
+`updateQuality()` iterates through the this.items array, calling the updateItemQuality function on each item.
+
 ## Getting started
+
+Clone the repo locally: `https://github.com/davekempsell/gilded-rose-tech-test.git`
 
 Install dependencies
 
@@ -43,32 +82,9 @@ To run all tests
 npm test
 ```
 
-To run all tests in watch mode
-
-```sh
-npm run test:watch
-```
-
 To generate test coverage report
 
 ```sh
 npm run test:coverage
 ```
 
-## Design
-
-At first I read through the existing code to understand what was happening currently, and to answer questions from the description. This led me to being able to ascertain that items decreased by 1 in quality as 'standard', and 'Aged Brie' increased by 1, as these values weren't stated in the brief.
-
-I decided to unit test the Item class as a starting point, before moving on to the Shop class, for completeness of testing. Once I moved on to testing the Shop class, I decided to remove the existing code, and rebuild the function from the bottom up using TDD.
-
-I broke down the requirements of the class as follows:
-
-`What updateQuality does:`
-**Item      || sellIn    || Quality**
-Normal    || -1        || -1 (-2 when sellIn <= 0)
-Sulfuras  || no change || no change
-Aged Brie || -1        || +1
-Backstage || -1        || +1 (+2 when sellIn <= 10, +3 when sellIn <= 5, =0 when sellIn <= 0)
-Conjured  || -1        || -2 (-4 when sellIn <= 0)
-
-This table allowed me to plan my process of test driving the function. Creating tests to incrementally add functionality to satisfy the requirements of the program, finishing with adding the Conjured items in much easier way than inserting it into the previous code.
